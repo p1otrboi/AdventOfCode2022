@@ -4,7 +4,7 @@
 
 static string Day1()
 {
-    string[] list = File.ReadAllLines(@"C:\Users\joaki\source\repos\AdventOfCode2022\AdventOfCode2022\Files\list.txt");
+    string[] list = File.ReadAllLines(@"Files/list.txt");
     Dictionary<int, int> dict = new();
     int key = 1;
     foreach (string line in list)
