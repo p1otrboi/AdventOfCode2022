@@ -38,7 +38,7 @@ static void Day2()
 
     int score = 0;
 
-    string[] strategy = File.ReadAllLines(@"Files/day2.txt");
+    string[] strategy = File.ReadAllLines(@"C:\Users\joaki\source\repos\AdventOfCode2022\AdventOfCode2022\Files\day2.txt");
 
     for (int i = 0; i <= strategy.Length; i++)
     {
