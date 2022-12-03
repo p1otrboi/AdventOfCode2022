@@ -48,25 +48,27 @@ static void Day2Part1()
 }
 static void Day2Part2()
 {
+    string[] strategy = File.ReadAllLines(@"C:\Users\joaki\Desktop\day2.txt");
+
     var dict = new Dictionary<char, int>() {
         { 'A', 1 }, { 'B', 2 }, { 'C', 3 },
         { 'X', 1 }, { 'Y', 2 }, { 'Z', 3 } };
-    var toWin = new Dictionary<char, int>() {
-        { 'A', 2 }, { 'B', 3 }, { 'C', 1 } };
-    var toLose = new Dictionary<char, int>() {
-        { 'A', 3 }, { 'B', 1 }, { 'C', 2 } };
+    var toWin = new Dictionary<int, int>() {
+        { 1, 2 }, { 2, 3 }, { 3, 1 } };
+    var toLose = new Dictionary<int, int>() {
+        { 1, 3 }, { 2, 1 }, { 3, 2 } };
 
     int score = 0;
 
-    string[] strategy = File.ReadAllLines(@"C:\Users\joaki\Desktop\day2.txt");
-
     for (int i = 0; i < strategy.Length; i++)
     {
-        switch (dict[strategy[i].ToCharArray()[2]])
+        int outcome = dict[strategy[i].ToCharArray()[2]];
+        int elf = dict[strategy[i].ToCharArray()[0]];
+        switch (outcome)
         {
-            case 3: score += 6 + toWin[strategy[i].ToCharArray()[0]]; break;
-            case 2: score += 3 + dict[strategy[i].ToCharArray()[0]]; break;
-            default: score += toLose[strategy[i].ToCharArray()[0]]; break;
+            case 3: score += 6 + toWin[elf]; break;
+            case 2: score += 3 + elf; break;
+            default: score += toLose[elf]; break;
         }
     }
     Console.WriteLine(score);
