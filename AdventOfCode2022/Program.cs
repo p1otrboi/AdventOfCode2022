@@ -1,9 +1,4 @@
-﻿Console.WriteLine($"Day 1{Day1()}");
-Day2();
-
-
-
-static string Day1()
+﻿static string Day1()
 {
     string[] list = File.ReadAllLines(@"Files/list.txt");
     Dictionary<int, int> dict = new();
@@ -27,26 +22,52 @@ static string Day1()
     return $"\nPart 1: {dict.Select(x => x.Value).Max()}" +
            $"\nPart 2: {dict.OrderByDescending(x => x.Value).Take(3).Sum(x => x.Value)}";
 }
-
-static void Day2()
+static void Day2Part1()
 {
     var dict = new Dictionary<char, int>() { 
         { 'X', 1 }, { 'Y', 2 }, { 'Z', 3 }, 
         { 'A', 1 }, { 'B', 2 }, { 'C', 3 } };
-
-    int[] rps = new int[] { 0, 1, 2, };
+    
+    int score = 0;
+    
+    string[] strategy = File.ReadAllLines(@"Files/day2.txt");
+    
+    for (int i = 0; i < strategy.Length; i++)
+    {
+        int user = dict[strategy[i].ToCharArray()[2]];
+        int elf = dict[strategy[i].ToCharArray()[0]];
+        
+        if (elf % 3 + 1 == user)
+            score += 6 + user;
+        else if (user % 3 + 1 == elf)
+            score += user;
+        else
+            score += 3 + user;
+    }
+    Console.WriteLine(score);
+}
+static void Day2Part2()
+{
+    var dict = new Dictionary<char, int>() {
+        { 'A', 1 }, { 'B', 2 }, { 'C', 3 },
+        { 'X', 1 }, { 'Y', 2 }, { 'Z', 3 } };
+    var toWin = new Dictionary<char, int>() {
+        { 'A', 2 }, { 'B', 3 }, { 'C', 1 } };
+    var toLose = new Dictionary<char, int>() {
+        { 'A', 3 }, { 'B', 1 }, { 'C', 2 } };
 
     int score = 0;
 
-    string[] strategy = File.ReadAllLines(@"C:\Users\joaki\source\repos\AdventOfCode2022\AdventOfCode2022\Files\day2.txt");
+    string[] strategy = File.ReadAllLines(@"C:\Users\joaki\Desktop\day2.txt");
 
-    for (int i = 0; i <= strategy.Length; i++)
+    for (int i = 0; i < strategy.Length; i++)
     {
-        int decision = ((dict[strategy[i].ToArray()[2]])-(dict[strategy[i].ToArray()[2]])+3)% 3;
-        Console.WriteLine(decision);
+        switch (dict[strategy[i].ToCharArray()[2]])
+        {
+            case 3: score += 6 + toWin[strategy[i].ToCharArray()[0]]; break;
+            case 2: score += 3 + dict[strategy[i].ToCharArray()[0]]; break;
+            default: score += toLose[strategy[i].ToCharArray()[0]]; break;
+        }
     }
-
-
-
-
+    Console.WriteLine(score);
 }
