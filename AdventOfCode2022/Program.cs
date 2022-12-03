@@ -74,7 +74,6 @@
 //    Console.WriteLine(score);
 //}
 
-using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -108,34 +107,34 @@ using System.Text.RegularExpressions;
 //    Console.WriteLine(prioritiesSum);
 //}
 
-Day3Part2();
-static void Day3Part2()
-{
-    string[] rucksack = File.ReadAllLines(@"Files/day3.txt");
-    int keysumtotal = 0;
-    for (int i = 0; i < rucksack.Length; i+=3)
-    {
-        var elf1 = rucksack[i];
-        var elf2 = rucksack[i+1];
-        var elf3 = rucksack[i+2];
-        string commonkey = string.Empty;
-        int keysumgroup = 0;
-        foreach (char c in elf1)
-        {
-            if (Regex.Count(c.ToString(), @$"[{elf2}]") > 0 && Regex.Count(c.ToString(), @$"[{elf3}]") > 0)
-                commonkey = c.ToString();
-        }
-        if (commonkey == commonkey.ToUpper())
-        {
-            byte ascii = Encoding.ASCII.GetBytes(commonkey)[0];
-            keysumgroup += (ascii - 38);
-        }
-        else
-        {
-            byte ascii = Encoding.ASCII.GetBytes(commonkey)[0];
-            keysumgroup += (ascii - 96);
-        }
-        keysumtotal += keysumgroup;
-    }
-    Console.WriteLine(keysumtotal);
-}
+
+//static void Day3Part2()
+//{
+//    string[] rucksack = File.ReadAllLines(@"Files/day3.txt");
+//    int keysumtotal = 0;
+//    for (int i = 0; i < rucksack.Length; i+=3)
+//    {
+//        var elf1 = rucksack[i];
+//        var elf2 = rucksack[i+1];
+//        var elf3 = rucksack[i+2];
+//        string commonkey = string.Empty;
+//        int keysumgroup = 0;
+//        foreach (char c in elf1)
+//        {
+//            if (Regex.Count(c.ToString(), @$"[{elf2}]") > 0 && Regex.Count(c.ToString(), @$"[{elf3}]") > 0)
+//                commonkey = c.ToString();
+//        }
+//        if (commonkey == commonkey.ToUpper())
+//        {
+//            byte ascii = Encoding.ASCII.GetBytes(commonkey)[0];
+//            keysumgroup += (ascii - 38);
+//        }
+//        else
+//        {
+//            byte ascii = Encoding.ASCII.GetBytes(commonkey)[0];
+//            keysumgroup += (ascii - 96);
+//        }
+//        keysumtotal += keysumgroup;
+//    }
+//    Console.WriteLine(keysumtotal);
+//}
