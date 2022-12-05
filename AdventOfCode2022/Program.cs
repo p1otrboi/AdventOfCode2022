@@ -74,6 +74,7 @@
 //    Console.WriteLine(score);
 //}
 
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -175,33 +176,65 @@ using System.Text.RegularExpressions;
 //    Console.WriteLine(count);
 //}
 
-Day5Part1();
+//Day5Part1();
 
-static void Day5Part1()
-{
-    string[] input = File.ReadAllLines(@"Files/day5.txt");
-    var stack1 = new List<string>();
-    var stack2 = new List<string>();
-    var stack3 = new List<string>();
-    var stack4 = new List<string>();
-    var stack5 = new List<string>();
-    var stack6 = new List<string>();
-    var stack7 = new List<string>();
-    var stack8 = new List<string>();
-    var stack9 = new List<string>();
+//static void Day5Part1()
+//{
+//    string[] input = File.ReadAllLines(@"Files/day5.txt");
+//    List<string>[] stack = new List<string>[10].Select(x => new List<string>()).ToArray();
 
-    for (int i = 0; i < input.Length; i++)
-    {
-        stack1.Add(input[i].Substring(1, 1));
-        stack2.Add(input[i].Substring(5, 1));
-        stack1.Add(input[i].Substring(9, 1));
-        stack1.Add(input[i].Substring(13, 1));
-        stack1.Add(input[i].Substring(17, 1));
-        stack1.Add(input[i].Substring(21, 1));
-        stack1.Add(input[i].Substring(25, 1));
-        stack1.Add(input[i].Substring(29, 1));
-        stack1.Add(input[i].Substring(33, 1));
-    }
-    foreach(var s in stack1)
-        Console.WriteLine(s);
-}
+//    for (int i = 7; i >= 0; i--)
+//    {
+//        int stackCount = 1;
+//        for (int j = 1; j < 34; j += 4)
+//        {
+//            if (Regex.IsMatch(input[i].Substring(j, 1), @"[A-Z]"))
+//                stack[stackCount].Add(input[i].Substring(j, 1));
+//            stackCount += 1;
+//        }
+//    }
+//    for (int i = 10; i < input.Length; i++)
+//    {
+//        int move = int.Parse(input[i].Split(" ")[1]);
+//        int from = int.Parse(input[i].Split(" ")[3]);
+//        int to = int.Parse(input[i].Split(" ")[5]);
+
+//        for (int j = 0; j < move; j++)
+//        {
+//            stack[to].Add(stack[from].LastOrDefault());
+//            stack[from].RemoveAt(stack[from].Count - 1);
+//        }
+//    }
+//    foreach (List<string> list in stack)
+//    {
+//        Console.Write(list.LastOrDefault());
+//    }
+//}
+//static void Day5Part2()
+//{
+//    string[] input = File.ReadAllLines(@"Files/day5.txt");
+//    List<string>[] stack = new List<string>[10].Select(x => new List<string>()).ToArray();
+
+//    for (int i = 7; i >= 0; i--)
+//    {
+//        int stackCount = 1;
+//        for (int j = 1; j < 34; j += 4)
+//        {
+//            if (Regex.IsMatch(input[i].Substring(j, 1), @"[A-Z]"))
+//                stack[stackCount].Add(input[i].Substring(j, 1));
+//            stackCount += 1;
+//        }
+//    }
+//    for (int i = 10; i < input.Length; i++)
+//    {
+//        int move = int.Parse(input[i].Split(" ")[1]);
+//        int from = int.Parse(input[i].Split(" ")[3]);
+//        int to = int.Parse(input[i].Split(" ")[5]);
+//        stack[to].AddRange(stack[from].TakeLast(move));
+//        stack[from].RemoveRange(stack[from].Count - move, move);
+//    }
+//    foreach (List<string> list in stack)
+//    {
+//        Console.Write(list.LastOrDefault());
+//    }
+//}
