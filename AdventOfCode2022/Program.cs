@@ -34,7 +34,7 @@ static string Day1()
     return $"\nPart 1: {dict.Select(x => x.Value).Max()}" +
            $"\nPart 2: {dict.OrderByDescending(x => x.Value).Take(3).Sum(x => x.Value)}";
 }
-static void Day2Part1()
+static int Day2Part1()
 {
     var dict = new Dictionary<char, int>() {
         { 'X', 1 }, { 'Y', 2 }, { 'Z', 3 },
@@ -56,7 +56,7 @@ static void Day2Part1()
         else
             score += 3 + user;
     }
-    Console.WriteLine(score);
+    return score;
 }
 static void Day2Part2()
 {
