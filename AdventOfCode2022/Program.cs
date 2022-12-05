@@ -168,9 +168,40 @@ using System.Text.RegularExpressions;
 //        int elf2low = int.Parse(line.Split('-', ',')[2]);
 //        int elf2hi = int.Parse(line.Split('-', ',')[3]);
 //        var elftwo = Enumerable.Range(elf2low, (elf2hi - elf2low)+1).ToArray();
-            
+
 //        if (elfone.Intersect(elftwo).Any())
 //            count++;
 //    }
 //    Console.WriteLine(count);
 //}
+
+Day5Part1();
+
+static void Day5Part1()
+{
+    string[] input = File.ReadAllLines(@"Files/day5.txt");
+    var stack1 = new List<string>();
+    var stack2 = new List<string>();
+    var stack3 = new List<string>();
+    var stack4 = new List<string>();
+    var stack5 = new List<string>();
+    var stack6 = new List<string>();
+    var stack7 = new List<string>();
+    var stack8 = new List<string>();
+    var stack9 = new List<string>();
+
+    for (int i = 0; i < input.Length; i++)
+    {
+        stack1.Add(input[i].Substring(1, 1));
+        stack2.Add(input[i].Substring(5, 1));
+        stack1.Add(input[i].Substring(9, 1));
+        stack1.Add(input[i].Substring(13, 1));
+        stack1.Add(input[i].Substring(17, 1));
+        stack1.Add(input[i].Substring(21, 1));
+        stack1.Add(input[i].Substring(25, 1));
+        stack1.Add(input[i].Substring(29, 1));
+        stack1.Add(input[i].Substring(33, 1));
+    }
+    foreach(var s in stack1)
+        Console.WriteLine(s);
+}
