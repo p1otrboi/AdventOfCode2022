@@ -15,7 +15,7 @@ static int Part1(string inputpath)
         for (int i = 3; i < input.Length; i++)
         {
             recentFourChars.Add(input[i]);
-            if (recentFourChars.Count == recentFourChars.Distinct().Count())
+            if (recentFourChars.Distinct().Count() == 4)
                 return i + 1;
             else
                 recentFourChars.RemoveAt(0);
@@ -52,7 +52,7 @@ static int Part2(string inputpath)
         for (int i = 13; i < input.Length; i++)
         {
             recentMessage.Add(input[i]);
-            if (recentMessage.Count == recentMessage.Distinct().Count())
+            if (recentMessage.Distinct().Count() == 14)
                 return i + 1;
             else
                 recentMessage.RemoveAt(0);
