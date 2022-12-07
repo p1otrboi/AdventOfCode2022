@@ -84,3 +84,86 @@
 //total sizes is 95437 (94853 + 584). (As in this example, this process can count files more than once!)
 
 //Find all of the directories with a total size of at most 100000. What is the sum of the total sizes of those directories?
+
+Console.WriteLine(Day7());
+static int Day7()
+{
+    string[] input = File.ReadAllLines("input.txt");
+
+    var root = new Folder("root");
+    var curFolder = root;
+
+    for (int i = 0; i < input.Length; i++)
+    {
+        if (input[i] == "$ ls")
+            continue;
+        if (input[i].StartsWith("dir "))
+            continue;
+        if (input[i].StartsWith("$ cd "))
+        {
+            var output = input[i].Split(' ');
+
+            switch (output[2])
+            {
+                case "/":
+                    curFolder = root;
+                    continue;
+                case "..":
+                    curFolder = curFolder.parent;
+                    continue;
+                default:
+                    if (curFolder.subFolders.Exists(x => x.name == output[2]))
+                        curFolder = curFolder.subFolders.First(x => x.name == output[2]);
+                    else
+                    {
+                        var newFolder = new Folder($"{output[2]}", curFolder);
+                        curFolder.subFolders.Add(newFolder);
+                        curFolder = newFolder;
+                    }
+                    continue;
+            }
+        }
+        else
+        {
+            var output = input[i].Split(' ');
+
+            if (long.TryParse(output[0], out var result))
+            {
+                curFolder.files.Add(output[1], result); ;
+            }
+        }
+    }
+    return root.GetTotalBelow(100000);
+}
+
+
+
+
+
+
+
+
+class Folder
+{
+    public string? name;
+    public Folder parent;
+    public Dictionary<string, long> files = new();
+    public List<Folder> subFolders = new();
+
+    public Folder(string? name, Folder parent = null)
+    { 
+        this.name = name;
+        this.parent = parent;
+    }
+
+    public long GetTotalFileSize()
+    {
+        long size = 0;
+        foreach (var folder in subFolders)
+            size += folder.GetTotalFileSize();
+        foreach (var file in files)
+            size += file.Value;
+        return size;
+    }
+
+}
