@@ -217,5 +217,4 @@ class Folder
 
         return folderSizes;
     }
-
 }
