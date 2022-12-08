@@ -152,7 +152,7 @@ static string Day7()
     var rootSize = root.GetTotalFileSize();
     var needToFree = -70000000 + 30000000 + rootSize;
     return $"Part 1: {root.GetTotalBelow(100000)}" +
-        $"\nPart 2: {root.FindDirectoriesAbove(needToFree).Min()}";
+        $"\nPart 2: {root.FindFoldersLargerThan(needToFree).Min()}";
 }
 
 class Folder
@@ -198,13 +198,13 @@ class Folder
         return value;
     }
 
-    public List<long> FindDirectoriesAbove(long minSize)
+    public List<long> FindFoldersLargerThan(long minSize)
     {
         long folderSize = 0;
         var folderSizes = new List<long>();
 
         foreach (var folder in subFolders)
-            folderSizes.AddRange(folder.FindDirectoriesAbove(minSize));
+            folderSizes.AddRange(folder.FindFoldersLargerThan(minSize));
 
         foreach (var folder in subFolders)
             folderSize += folder.GetTotalFileSize();
