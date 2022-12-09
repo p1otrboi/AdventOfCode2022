@@ -1,5 +1,9 @@
-﻿Console.WriteLine(Part1());
+﻿using System.Text.RegularExpressions;
+
+Console.WriteLine(Part1());
 Console.WriteLine(Part2());
+
+
 
 static int Part1()
 {

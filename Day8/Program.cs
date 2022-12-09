@@ -43,10 +43,26 @@ static string Day8()
 {
     string[] input = File.ReadAllLines("input.txt");
     var TreeMap = new Dictionary<string, int>();
-
-
+    //ScenicScore();
     //execute
     return $"Part 1: {Sum()}";
+
+    //void ScenicScore()
+    //{
+    //    var ScoreMap = new Dictionary<string, int>();
+
+    //    for (int x = 0; x < input.Length; x++)
+    //    {
+    //        for (int y = 0; y < input.Length; y++)
+    //        {
+    //            var indexStopLeft = 0;
+    //            var indexStopRight = 0;
+    //            var indexStopUp = 0;
+    //            var indexStopDown = 0;
+    //        }
+    //    }
+    //}
+
 
 
     int Sum()
@@ -56,7 +72,6 @@ static string Day8()
         Top();
         Bottom();
         int edgeTrees = (input.Length * 4) - 4;
-
         return TreeMap.Values.Sum() + edgeTrees;
     }
     void Left()
