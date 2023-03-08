@@ -254,3 +254,106 @@ So, there are 13 positions the tail visited at least once.
 
 Simulate your complete hypothetical series of motions. 
 How many positions does the tail of the rope visit at least once?*/
+
+string[] input = File.ReadAllLines("./input.txt");
+
+int headX = 0;
+int headY = 0;
+int tailX = 0;
+int tailY = 0;
+
+var tailVisited = new HashSet<(int, int)>
+{
+    (headX, headY)
+};
+
+foreach (string s in input)
+{
+    var direction = s.Split(' ')[0];
+    var distance = int.Parse(s.Split(' ')[1]);
+
+    switch (direction)
+    {
+        case "R":
+            for (int i = 0; i < distance; i++)
+            {
+                headX++;
+                CheckPosition();
+            }
+            break;
+        case "L":
+            for (int i = 0; i < distance; i++)
+            {
+                headX--;
+                CheckPosition();
+            }
+            break;
+        case "U":
+            for (int i = 0; i < distance; i++)
+            {
+                headY++;
+                CheckPosition();
+            }
+            break;
+        case "D":
+            for (int i = 0; i < distance; i++)
+            {
+                headY--;
+                CheckPosition();
+            }
+            break;
+    }
+}
+
+Console.WriteLine(tailVisited.Count());
+
+void CheckPosition()
+{
+    // dont move if head is to close
+    if (Math.Abs(headX - tailX) <= 1 && Math.Abs(headY - tailY) <= 1)
+    {
+        return;
+    }
+    // same x, move in y dir
+    if (headX == tailX)
+    {
+        if (headY == tailY + 2) tailY++;
+        if (headY == tailY - 2) tailY--;
+        return;
+    }
+    // same y, move in x dir
+    if (headY == tailY)
+    {
+        if (headX == tailX + 2) tailX++;
+        if (headX == tailX - 2) tailX--;
+        return;
+    }
+    // move diagonally
+    if (headX > tailX && headY > tailY)
+    {
+        tailX++;
+        tailY++;
+        return;
+    }
+    if (headX > tailX && headY < tailY)
+    {
+        tailX--;
+        tailY++;
+        return;
+    }
+    if (headX < tailX && headY > tailY)
+    {
+        tailX++;
+        tailY--;
+        return;
+    }
+    if (headX < tailX && headY < tailY)
+    {
+        tailX--;
+        tailY--;
+        return;
+    }
+
+    if (!tailVisited.Contains((tailX, tailY)))
+        tailVisited.Add((tailX, tailY));
+}
